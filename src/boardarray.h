@@ -16,6 +16,18 @@ class BoardArray : public Board {
         void add(Entry* entry) {
             // TODO: IMPLEMENT THIS FUNCTION
             // ALGORITHM IS PROVIDED IN INSTRUCTIONS.TXT
+            for (int i = 0; i < index; i++){
+                Entry existing= array[i];
+                bool compare(existing.compare(entry));
+                
+                    if(existing.compare(entry)== true){
+                        for (int j = 0; j < index; j++){
+                            array[i+1]= array[i];
+                        }
+                    }
+            
+               
+            }
             return;
         }
 
