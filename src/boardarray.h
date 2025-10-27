@@ -12,23 +12,45 @@ class BoardArray : public Board {
             array = new Entry[SIZE];
             index = 0;
         }
-
-        void add(Entry* entry) {
+            
+       void add(Entry* entry) {
             // TODO: IMPLEMENT THIS FUNCTION
             // ALGORITHM IS PROVIDED IN INSTRUCTIONS.TXT
-            for (int i = 0; i < index; i++){
-                Entry existing= array[i];
-                bool compare(existing.compare(entry));
-                
-                    if(existing.compare(entry)== true){
-                        for (int j = 0; j < index; j++){
-                            array[i+1]= array[i];
+                int pos = index;
+               
+                    bool shouldInsert = false;
+                    int insertPos = index;
+
+                    for (int i = 0; i < index; i++) {
+                        if (entry->score > array[i].score) {
+                            insertPos = i;
+                            shouldInsert = true;
+                            break;
                         }
                     }
-            
-               
-            }
-            return;
+
+                    if (index < SIZE) {
+                        if (!shouldInsert) {
+                            insertPos = index; 
+                        }
+
+                        for (int i = index; i > insertPos; i--) {
+                            array[i] = array[i - 1];
+                        }
+
+                        array[insertPos] = *entry;
+                        index++;
+                        return;
+                    }
+                    
+                    if (entry->score > array[SIZE - 1].score) {
+                        for (int i = SIZE - 1; i > insertPos; i--) {
+                            array[i] = array[i - 1];
+                        }
+                        array[insertPos] = *entry;
+                    } else {
+                        cout << entry->name << "'s score is too low to be added!" << endl;
+                    }
         }
 
         void print() {
